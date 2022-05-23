@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.loginController">
+    <children>
+        <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
+         <children>
+            <Pane layoutX="331.0" layoutY="205.0" prefHeight="273.0" prefWidth="594.0" style="-fx-background-color: #cccaca;">
+               <children>
+                  <TextField fx:id="usernameTextField" layoutX="218.0" layoutY="33.0" prefHeight="41.0" prefWidth="366.0" />
+                  <Button layoutX="35.0" layoutY="209.0" mnemonicParsing="false" onAction="#switchToStartUpScreen" prefHeight="50.0" prefWidth="189.0" styleClass="button1" text="Go Back">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button layoutX="265.0" layoutY="209.0" mnemonicParsing="false" onAction="#authenticateCheck" prefHeight="50.0" prefWidth="319.0" styleClass="button1" text="Login">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <PasswordField fx:id="passwordTextField" layoutX="218.0" layoutY="96.0" prefHeight="41.0" prefWidth="366.0" />
+                  <Label layoutX="50.0" layoutY="33.0" prefHeight="41.0" prefWidth="127.0" text="Username" />
+                  <Label layoutX="50.0" layoutY="96.0" prefHeight="41.0" prefWidth="127.0" text="Password" />
+                  <Hyperlink alignment="CENTER_RIGHT" layoutX="297.0" layoutY="145.0" prefHeight="28.0" prefWidth="277.0" text="Forgot Password?" />
+               </children>
+            </Pane>
+            <ImageView fitHeight="63.0" fitWidth="181.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logoBank.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+    </children>
+</AnchorPane>

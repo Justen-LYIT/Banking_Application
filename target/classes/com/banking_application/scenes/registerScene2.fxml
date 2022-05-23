@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.registerController">
+    <children>
+        <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="181.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logoBank.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="132.0" layoutY="106.0" prefHeight="520.0" prefWidth="993.0">
+               <children>
+                  <Pane layoutX="64.0" layoutY="63.0" prefHeight="394.0" prefWidth="865.0" style="-fx-background-color: #cccaca;">
+                     <children>
+                        <Label contentDisplay="CENTER" layoutX="252.0" layoutY="26.0" text="Provide Personal Information" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="612.0" layoutY="339.0" mnemonicParsing="false" onAction="#finaliseCreateAccount" prefHeight="41.0" prefWidth="205.0" styleClass="button1" text="Create Account">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="24.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="41.0" prefWidth="115.0" styleClass="button1" text="Go Back">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <TextField fx:id="firstNameField" layoutX="199.0" layoutY="104.0" prefHeight="26.0" prefWidth="197.0" />
+                        <Label layoutX="57.0" layoutY="104.0" prefHeight="30.0" prefWidth="127.0" text="First Name" />
+                        <Label layoutX="57.0" layoutY="142.0" prefHeight="30.0" prefWidth="127.0" text="Middle Name" />
+                        <Label layoutX="57.0" layoutY="182.0" prefHeight="30.0" prefWidth="127.0" text="Last Name" />
+                        <Label layoutX="57.0" layoutY="223.0" prefHeight="30.0" prefWidth="127.0" text="Date of Birth" />
+                        <DatePicker fx:id="dateOfBirthField" layoutX="199.0" layoutY="223.0" prefHeight="30.0" prefWidth="197.0" />
+                        <TextField fx:id="middleNameField" layoutX="199.0" layoutY="142.0" prefHeight="30.0" prefWidth="197.0" />
+                        <TextField fx:id="lastNameField" layoutX="199.0" layoutY="182.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="57.0" layoutY="261.0" prefHeight="30.0" prefWidth="127.0" text="Phone Number" />
+                        <TextField fx:id="phoneField" layoutX="199.0" layoutY="261.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="86.0" prefHeight="30.0" prefWidth="127.0" text="Address Line 1" />
+                        <TextField fx:id="address1Field" layoutX="612.0" layoutY="86.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="123.0" prefHeight="30.0" prefWidth="127.0" text="Address Line 2" />
+                        <TextField fx:id="address2Field" layoutX="612.0" layoutY="123.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="162.0" prefHeight="30.0" prefWidth="127.0" text="Address Line 3" />
+                        <TextField fx:id="address3Field" layoutX="612.0" layoutY="162.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="198.0" prefHeight="30.0" prefWidth="127.0" text="City" />
+                        <TextField fx:id="cityField" layoutX="612.0" layoutY="198.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="237.0" prefHeight="30.0" prefWidth="127.0" text="ZIP" />
+                        <TextField fx:id="zipField" layoutX="612.0" layoutY="237.0" prefHeight="30.0" prefWidth="197.0" />
+                        <Label layoutX="470.0" layoutY="276.0" prefHeight="30.0" prefWidth="127.0" text="Country" />
+                        <ChoiceBox fx:id="countriesAvailabe" layoutX="612.0" layoutY="276.0" prefHeight="30.0" prefWidth="197.0" stylesheets="@../styleSheet.css">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Austria" />
+                                 <String fx:value="Belgium" />
+                                 <String fx:value="Bulgaria" />
+                                 <String fx:value="Cyprus" />
+                                 <String fx:value="Czech Republic" />
+                                 <String fx:value="Denmark" />
+                                 <String fx:value="Estonia" />
+                                 <String fx:value="Finland" />
+                                 <String fx:value="France" />
+                                 <String fx:value="Germany" />
+                                 <String fx:value="Greece" />
+                                 <String fx:value="Hungary" />
+                                 <String fx:value="Ireland" />
+                                 <String fx:value="Italy" />
+                                 <String fx:value="Latvia" />
+                                 <String fx:value="Lithuania" />
+                                 <String fx:value="Luxembourg" />
+                                 <String fx:value="Malta" />
+                                 <String fx:value="Netherlands" />
+                                 <String fx:value="Poland" />
+                                 <String fx:value="Portugal" />
+                                 <String fx:value="Romania" />
+                                 <String fx:value="Slovakia" />
+                                 <String fx:value="Slovenia" />
+                                 <String fx:value="Spain" />
+                                 <String fx:value="Sweden" />
+                                 <String fx:value="United Kingdom" />
+                              </FXCollections>
+                           </items>
+                        </ChoiceBox>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children></Pane>
+    </children>
+</AnchorPane>

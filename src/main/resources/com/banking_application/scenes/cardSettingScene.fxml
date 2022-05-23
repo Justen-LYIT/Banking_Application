@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.cardSettingController">
+    <children>
+        <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
+            <children>
+                <ImageView fitHeight="63.0" fitWidth="181.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../logoBank.png" />
+                    </image>
+                </ImageView>
+                <AnchorPane layoutX="14.0" layoutY="131.0" prefHeight="516.0" prefWidth="86.0">
+                    <children>
+                        <Separator layoutX="90.0" layoutY="-10.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="11.0" />
+                        <AnchorPane onMouseClicked="#switchToHomePageScreen" prefHeight="101.0" prefWidth="67.0">
+                            <children>
+                                <ImageView fx:id="homePageImage" fitHeight="103.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../home.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="81.0" prefHeight="25.0" prefWidth="86.0" style="-fx-font-family: Impact;" text="Home" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </AnchorPane>
+                        <AnchorPane layoutY="139.0" onMouseClicked="#switchToAccountsScreen" prefHeight="101.0" prefWidth="86.0">
+                            <children>
+                                <ImageView fx:id="accountsImage" fitHeight="103.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../wallet.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="81.0" prefHeight="25.0" prefWidth="86.0" style="-fx-font-family: Impact;" text="Accounts" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </AnchorPane>
+                        <AnchorPane layoutY="274.0" onMouseClicked="#switchToServicesScreen" prefHeight="101.0" prefWidth="86.0">
+                            <children>
+                                <ImageView fx:id="servicesImage" fitHeight="103.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../services.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="81.0" prefHeight="25.0" prefWidth="86.0" style="-fx-font-family: Impact;" text="Services" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </AnchorPane>
+                        <AnchorPane layoutX="5.0" layoutY="396.0" onMouseClicked="#switchToSettingsScreen" prefHeight="101.0" prefWidth="86.0">
+                            <children>
+                                <ImageView fx:id="settingsImage" fitHeight="103.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../settings.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="90.0" prefHeight="25.0" prefWidth="86.0" style="-fx-font-family: Impact;" text="Settings" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <ImageView fx:id="logoutImage" fitHeight="51.0" fitWidth="50.0" layoutX="1192.0" layoutY="14.0" onMouseClicked="#switchToStartUpScreen" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../logout.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ImageView>
+            <AnchorPane layoutX="505.0" layoutY="145.0" prefHeight="188.0" prefWidth="366.0" style="-fx-background-color: #cccaca; -fx-background-radius: 20px;">
+               <children>
+                  <Label fx:id="cardNameLabel" alignment="CENTER" layoutX="-6.0" layoutY="1.0" prefHeight="53.0" prefWidth="372.0" text="Credit Card Name" textAlignment="CENTER" textOverrun="CLIP">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cardNumberLabel" alignment="CENTER" layoutX="-6.0" layoutY="58.0" prefHeight="47.0" prefWidth="367.0" text="Credit Card Number" textAlignment="CENTER" />
+                  <Label fx:id="cardExpLabel" alignment="CENTER" layoutX="5.0" layoutY="111.0" prefHeight="38.0" prefWidth="143.0" text="Exp Date" textAlignment="CENTER" />
+                  <Label fx:id="cardCVVLabel" alignment="CENTER" layoutX="205.0" layoutY="110.0" prefHeight="38.0" prefWidth="143.0" text="CVV" textAlignment="CENTER" />
+                  <Separator layoutX="13.0" layoutY="52.0" prefHeight="13.0" prefWidth="343.0" />
+                  <Separator layoutX="13.0" layoutY="143.0" prefHeight="13.0" prefWidth="343.0" />
+                  <Label fx:id="cardConnectedIBAN" alignment="CENTER" layoutX="2.0" layoutY="151.0" prefHeight="47.0" prefWidth="367.0" style="-fx-text-fill: #435dab; -fx-underline: true;" text="Connected IBAN" textAlignment="CENTER" textFill="#435dab" />
+               </children>
+            </AnchorPane>
+            <Button layoutX="1051.0" layoutY="611.0" mnemonicParsing="false" onAction="#switchToCardsSettingsScreen" prefHeight="43.0" prefWidth="162.0" styleClass="button1" text="Back" />
+            <Button fx:id="cancelButtonCard" layoutX="439.0" layoutY="411.0" mnemonicParsing="false" onAction="#cancelCard" prefHeight="43.0" prefWidth="236.0" text="Cancel Card" />
+            <Button layoutX="708.0" layoutY="410.0" mnemonicParsing="false" onAction="#replaceCard" prefHeight="43.0" prefWidth="236.0" text="Replace Card" />
+            <TextField fx:id="simulateTransactionValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="542.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <Button layoutX="699.0" layoutY="542.0" mnemonicParsing="false" onAction="#simulateTransaction" prefHeight="33.0" prefWidth="168.0" text="Simulate Payment" />
+            <TextField fx:id="simulateDepositValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="587.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <Button layoutX="699.0" layoutY="587.0" mnemonicParsing="false" onAction="#simulateDeposit" prefHeight="33.0" prefWidth="168.0" text="Simulate Deposit" />
+            <TextField fx:id="simulateWithdrawalValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="631.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <Button layoutX="699.0" layoutY="631.0" mnemonicParsing="false" onAction="#simulateWithdrawal" prefHeight="33.0" prefWidth="168.0" text="Simulate Withdrawal" />
+            <TextField editable="false" layoutX="450.0" layoutY="542.0" prefHeight="33.0" prefWidth="29.0" text="€" />
+            <TextField editable="false" layoutX="450.0" layoutY="587.0" prefHeight="33.0" prefWidth="29.0" text="€" />
+            <TextField editable="false" layoutX="450.0" layoutY="631.0" prefHeight="33.0" prefWidth="29.0" text="€" />
+            <TextField fx:id="simulateTransactionValueCents" layoutX="637.0" layoutY="542.0" prefHeight="33.0" prefWidth="40.0" text="00" />
+            <Label alignment="BOTTOM_CENTER" layoutX="625.0" layoutY="542.0" prefHeight="33.0" prefWidth="12.0" text="," />
+            <TextField fx:id="simulateDepositValueCents" layoutX="637.0" layoutY="587.0" prefHeight="33.0" prefWidth="40.0" text="00" />
+            <Label alignment="BOTTOM_CENTER" layoutX="625.0" layoutY="587.0" prefHeight="33.0" prefWidth="12.0" text="," />
+            <TextField fx:id="simulateWithdrawalValueCents" layoutX="637.0" layoutY="631.0" prefHeight="33.0" prefWidth="40.0" text="00" />
+            <Label alignment="BOTTOM_CENTER" layoutX="625.0" layoutY="631.0" prefHeight="33.0" prefWidth="12.0" text="," />
+            </children></Pane>
+    </children>
+</AnchorPane>

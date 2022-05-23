@@ -1,0 +1,109 @@
+
+/*
+Light
+ #F9F7F8
+ #818C91
+ #8BA2A2
+ #697A83
+ #153346
+ Dark
+    */
+
+ .root{
+    -fx-background-color: #F9F7F8;
+    -fx-font-size:12pt;
+}
+
+
+.label{
+    -fx-text-fill:  #153346;
+}
+
+.button1 {
+    -fx-background-color: #697A83;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F9F7F8;
+    -fx-text-transform: capitalize;
+}
+.button1:hover{
+    -fx-background-color: #153346;
+}
+
+.bold-text{
+    -fx-font-weight: bold;
+}
+.availableCountriesDropdown > .list-view { /* perhaps use a different/additional class for the combobox to be styled this way??? */
+   -fx-min-height: 400;
+   -fx-max-height: 400;
+   -fx-pref-width: 500;
+}
+
+
+.incorrectTextInput{
+    -fx-border-color: red;
+    -fx-border-width:2;
+}
+
+
+.greenText{
+    -fx-text-fill:#117246;
+}
+
+.redText{
+    -fx-text-fill:#701a11;
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
+
+
+.labelNameAccount{
+    -fx-font-size:14pt;
+    -fx-font-weight: bold;
+}
+
+.labelIBANAccount{
+    -fx-font-size:10pt;
+}
+
+.bankAccountOption{
+    -fx-cursor: hand;
+}
+
+.bankAccountOption:hover{
+    -fx-background-color: #cccaca;
+}
+
+.table-view .table-cell{
+    -fx-font-size:13px;
+}
+
+
+.cardSettingItem{
+    -fx-padding: 20 30px;
+    -fx-border-insets: 10 20px;
+    -fx-background-insets: 10 20px;
+    -fx-background-radius: 20px;
+}
+
+.cardSettingItem:hover{
+    -fx-background-color: #cccaca;
+}
+
+.selectablePane:hover{
+    -fx-background-color: #cccaca;
+    -fx-background-radius: 10px;
+}
+
+.selectedItem{
+    -fx-background-color: #b7b5b5!important;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.startUpController">
+    <children>
+        <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="463.0" layoutX="397.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../logoBank.png" />
+                    </image>
+                </ImageView>
+                <Button layoutX="397.0" layoutY="388.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="54.0" prefWidth="206.0" styleClass="button1" text="Login">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutX="654.0" layoutY="388.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="54.0" prefWidth="206.0" styleClass="button1" text="Register">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
