@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.requestCreditCardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.requestCreditCardController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt; -fx-border-radius: 10pt;">
             <children>

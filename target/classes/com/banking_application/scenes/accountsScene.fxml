@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.accountsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.accountsController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
             <children>
@@ -103,7 +103,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
-            <ScrollPane fx:id="accountOptionsScroll" layoutX="147.0" layoutY="66.0" prefHeight="154.0" prefWidth="1066.0">
+            <ScrollPane fx:id="accountOptionsScroll" layoutX="147.0" layoutY="64.0" prefHeight="156.0" prefWidth="1064.0">
               <content>
                 <AnchorPane maxHeight="100.0" minHeight="100.0" minWidth="0.0" prefHeight="100.0">
                      <children>
@@ -111,7 +111,7 @@
                      </children></AnchorPane>
               </content>
             </ScrollPane>
-            <TableView fx:id="tableViewAccountTransactions" layoutX="147.0" layoutY="256.0" prefHeight="401.0" prefWidth="1066.0">
+            <TableView fx:id="tableViewAccountTransactions" layoutX="147.0" layoutY="256.0" prefHeight="391.0" prefWidth="1066.0">
             <placeholder>
                 <Label text="Select a Bank Account on the Top to view your Transactions" />
             </placeholder>
@@ -124,8 +124,9 @@
 <!--                  <TableColumn prefWidth="94.0" text="Debit" />-->
 <!--              </columns>-->
             </TableView>
-            <Button layoutX="1017.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToCreateTransactionScreen" prefHeight="33.0" prefWidth="196.0" text="Create a Transaction" />
-            <Button layoutX="147.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToTransactionBetweenAccountsScreen" prefHeight="33.0" prefWidth="254.0" text="Transfer Funds Between Accounts" />
+            <Button layoutX="1017.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchToCreateTransactionScreen" prefHeight="33.0" prefWidth="196.0" text="Create a Transaction" />
+            <Button layoutX="148.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchToTransactionBetweenAccountsScreen" prefHeight="33.0" prefWidth="254.0" text="Transfer Funds Between Accounts" />
+            <Button fx:id="closeBank" disable="true" layoutX="1017.0" layoutY="647.0" mnemonicParsing="false" onAction="#closeBankAccount" prefHeight="31.0" prefWidth="196.0" text="Close Bank Account" visible="false" />
             </children></Pane>
     </children>
 </AnchorPane>

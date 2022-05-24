@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class OwnedAssets implements Serializable {
-    ArrayList<BankAccount> bankAccounts = new ArrayList<>();
-    ArrayList<Card> cards = new ArrayList<>();
+    final ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+    final ArrayList<Card> cards = new ArrayList<>();
 
     public OwnedAssets(){
         bankAccounts.add(new CurrentAccount());
@@ -95,15 +95,14 @@ public class OwnedAssets implements Serializable {
         return debtAccount;
     }
 
-    public DebitCard createNewDebitCard(){
+    public void createNewDebitCard(){
         for (BankAccount bankAccount: this.bankAccounts){
             if( bankAccount instanceof CurrentAccount ) {
                 DebitCard debitCard = new DebitCard(((CurrentAccount) bankAccount).getIBAN());
                 this.cards.add(debitCard);
-                return  debitCard;
+                return;
             }
         }
-        return  null;
     }
 
     public CreditCard createNewCreditCard(DebtAccount debtAccount, String cardName){
@@ -118,16 +117,20 @@ public class OwnedAssets implements Serializable {
 
         }
 
-        public void replaceCard(Card card){
+        public Card replaceCard(Card card){
             for (int i =0;i<this.cards.size(); i++) {
                 if(this.cards.get(i).equals(card)) {
                     if (card.getClass().getSimpleName().equals("CreditCard")) {
-                        this.cards.set(i, new CreditCard(card.getConnectedBankAccount() , card.getCardName()));
+                        CreditCard newCard = new CreditCard(card.getConnectedBankAccount() , card.getCardName());
+                        this.cards.set(i, newCard);
+                        return newCard;
                     } else if (card.getClass().getSimpleName().equals("DebitCard")) {
-                        this.cards.set(i, new DebitCard(card.getConnectedBankAccount() ));
+                        DebitCard newCard = new DebitCard(card.getConnectedBankAccount());
+                        this.cards.set(i, newCard );
                     }
                 }
             }
+            return null;
         }
 
         public void cancelBankAccount(BankAccount bankAccount){

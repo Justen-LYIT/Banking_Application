@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SavingAccount implements BankAccount, Serializable {
-    double debtLimit = 0;
+    final double debtLimit = 0;
     Double balance;
     Double interestRate;
     ArrayList<Transaction> transactions = new ArrayList<>();
@@ -30,14 +30,11 @@ public class SavingAccount implements BankAccount, Serializable {
     }
 
     @Override
-    public boolean withdrawFunds(double amount) {
+    public void withdrawFunds(double amount) {
         if(amount < 0 ) {
-            return false;
         } else if (amount > this.balance){
-            return false;
         } else {
             new Transaction(amount,this.IBAN,"N/A","Withdrawal of Funds on Physical Location","Withdrawal of Funds");
-            return true;
         }
     }
 

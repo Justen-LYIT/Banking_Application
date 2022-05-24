@@ -137,10 +137,9 @@ public class transactionBetweenAccountsController implements Initializable {
                                     Transaction transaction = new Transaction(totalTransactionValue, selectedFromIBAN, selectedToIBAN, memo.getText(), "Bank Transfer");
                                     DatabaseFileManager databaseFileManager = new DatabaseFileManager();
                                     databaseFileManager.writeTransactionObjectToFile(transaction);
-                                    System.out.println("Transaction Created Successfully");
                                     TimeUnit.MILLISECONDS.sleep(300);
                                     this.selectedBankAccount = bankAccount;
-                                    switchToSpecificAccountsScreen();
+                                    switchToTransitionScreen();
                                 } else {
                                     transactionValueInt.getStyleClass().add("incorrectTextInput");
                                 }
@@ -152,6 +151,23 @@ public class transactionBetweenAccountsController implements Initializable {
                 }
             }
         }
+    }
+
+
+
+    public void switchToTransitionScreen() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transitionScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        transitionController transitionController = loader.getController();
+        transitionController.initData(this.loggedInCustomer
+                ,this.selectedBankAccount
+                ,"Transaction Created Successfully"
+                , "Returning back to your Bank Account." );
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        transitionController.transition("bankAccount");
     }
 
 

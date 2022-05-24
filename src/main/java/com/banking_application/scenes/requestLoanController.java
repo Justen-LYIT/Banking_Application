@@ -1,32 +1,25 @@
 package com.banking_application.scenes;
 
+import com.banking_application.BankAccount;
 import com.banking_application.Customer;
 import com.banking_application.DebtAccount;
 import com.banking_application.Transaction;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class requestLoanController implements Initializable {
     private Scene scene;
@@ -102,8 +95,26 @@ public class requestLoanController implements Initializable {
         debtAccount.setInterestRate(interestRate);
         new Transaction(requestedAmount,debtAccount.getIBAN(),this.loggedInCustomer.retrieveCurrentAccount().getIBANNumber(),"Loan Request of € " + df.format(requestedAmount), "Loan Request");
         this.loggedInCustomer.initializeCustomer();
-        switchToAccountsScreen();
+        switchToTransitionScreen(debtAccount);
     }
+
+
+    public void switchToTransitionScreen(BankAccount bankAccount) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transitionScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        transitionController transitionController = loader.getController();
+        transitionController.initData(this.loggedInCustomer
+                ,bankAccount
+                ,"Loan Application was Successful"
+                , "Proceeding to your Bank Account." );
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        transitionController.transition("bankAccount");
+    }
+
+
 
     public void switchToStartUpScreen() throws IOException {
         parent = FXMLLoader.load(getClass().getResource(("startUpScene.fxml")));

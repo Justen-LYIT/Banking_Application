@@ -1,30 +1,23 @@
 package com.banking_application.scenes;
 
 import com.banking_application.BankAccount;
+import com.banking_application.Card;
 import com.banking_application.Customer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 public class transitionController implements Initializable {
     private Scene scene;
@@ -32,6 +25,7 @@ public class transitionController implements Initializable {
     private Parent parent;
     private Customer loggedInCustomer;
     private BankAccount selectedBankAccount;
+    private Card selectedCard;
     private Thread delayThread;
 
     @FXML
@@ -58,10 +52,19 @@ public class transitionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void initData(Customer customer, BankAccount bankAccount, String text1, String text2) throws IOException {
+    public void initData(Customer customer, BankAccount bankAccount, String text1, String text2) {
         this.loggedInCustomer=customer;
         this.loggedInCustomer.initializeCustomer();
         this.selectedBankAccount = bankAccount;
+
+        this.textLabel1.setText(text1);
+        this.textLabel2.setText(text2);
+    }
+
+    public void initData(Customer customer, Card card, String text1, String text2) {
+        this.loggedInCustomer=customer;
+        this.loggedInCustomer.initializeCustomer();
+        this.selectedCard = card;
 
         this.textLabel1.setText(text1);
         this.textLabel2.setText(text2);
@@ -84,6 +87,10 @@ public class transitionController implements Initializable {
 
                         if (transitionTo.equals("bankAccount")) {
                             switchToSpecificAccountsScreen();
+                        } else if (transitionTo.equals("card")){
+                            switchToCardSettingScreen(this.selectedCard);
+                        } else if (transitionTo.equals("cardOverview")){
+                            switchToCardsSettingsScreen();
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -91,6 +98,30 @@ public class transitionController implements Initializable {
                 })
         );
         timeline.playFromStart();
+    }
+
+    public void switchToCardsSettingsScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("cardsSettingsScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        cardsSettingsController cardsSettingsController = loader.getController();
+        cardsSettingsController.initData(this.loggedInCustomer);
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToCardSettingScreen(Card selectedCard) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("cardSettingScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        cardSettingController cardSettingController = loader.getController();
+        cardSettingController.initData(this.loggedInCustomer,selectedCard);
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToStartUpScreen() throws IOException {

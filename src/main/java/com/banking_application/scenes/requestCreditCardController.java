@@ -1,24 +1,16 @@
 package com.banking_application.scenes;
 
-import com.banking_application.BankAccount;
 import com.banking_application.Card;
 import com.banking_application.CreditCard;
 import com.banking_application.Customer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -90,8 +82,26 @@ public class requestCreditCardController implements Initializable {
 
     public void requestNewCreditCard(double debtLimit, String cardName) throws IOException {
         CreditCard card = this.loggedInCustomer.createNewCreditCard(debtLimit, cardName , cardName);
-        switchToCardSettingScreen(card);
+        switchToTransitionScreen(card);
     }
+
+
+
+    public void switchToTransitionScreen(Card card) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transitionScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        transitionController transitionController = loader.getController();
+        transitionController.initData(this.loggedInCustomer
+                ,card
+                ,"Credit Card Application was Successful"
+                , "Proceeding to your new Credit Card" );
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        transitionController.transition("card");
+    }
+
 
 
 

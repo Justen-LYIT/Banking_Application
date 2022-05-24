@@ -2,21 +2,14 @@ package com.banking_application.scenes;
 
 import com.banking_application.BankAccount;
 import com.banking_application.Customer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,8 +52,26 @@ public class requestSavingAccountController implements Initializable {
             bankName.getStyleClass().add("incorrectTextInput");
         } else {
             BankAccount bankAccount = this.loggedInCustomer.createNewSavingAccount(bankName.getText());
-            switchToSpecificAccountsScreen(bankAccount);
+            switchToTransitionScreen(bankAccount);
         }
+    }
+
+
+
+
+    public void switchToTransitionScreen(BankAccount bankAccount) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transitionScene.fxml"));
+        parent = loader.load();
+        scene = new Scene(parent);
+        transitionController transitionController = loader.getController();
+        transitionController.initData(this.loggedInCustomer
+                ,bankAccount
+                ,"Savings Account has been created"
+                , "Proceeding to your new Bank Account." );
+        stage = (Stage) homePageImage.getScene().getWindow();
+        stage.setScene(scene);
+        transitionController.transition("bankAccount");
     }
 
 

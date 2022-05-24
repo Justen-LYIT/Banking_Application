@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.createTransactionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.createTransactionController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
             <children>
@@ -104,7 +104,7 @@
                 </ImageView>
             <AnchorPane layoutX="298.0" layoutY="239.0" prefHeight="257.0" prefWidth="742.0">
                <children>
-                  <TextField fx:id="toIBAN" layoutX="278.0" layoutY="68.0" prefHeight="30.0" prefWidth="382.0" />
+                  <TextField fx:id="toIBAN" layoutX="278.0" layoutY="68.0" prefHeight="31.0" prefWidth="351.0" />
                   <TextField fx:id="memo" layoutX="278.0" layoutY="114.0" prefHeight="30.0" prefWidth="382.0" />
                   <TextField fx:id="transactionValueInt" alignment="CENTER_RIGHT" layoutX="307.0" layoutY="162.0" prefHeight="30.0" prefWidth="260.0" />
                   <TextField fx:id="transactionValueDouble" layoutX="582.0" layoutY="162.0" prefHeight="30.0" prefWidth="78.0" text="00" />
@@ -117,6 +117,14 @@
                   <Label layoutX="14.0" layoutY="162.0" prefHeight="30.0" prefWidth="281.0" text="Transaction Value" />
                   <Button layoutX="505.0" layoutY="229.0" mnemonicParsing="false" onAction="#createTransactions" prefHeight="36.0" prefWidth="158.0" styleClass="button1" text="Create" />
                   <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#switchToAccountsScreen" prefHeight="36.0" prefWidth="158.0" styleClass="button1" text="Go Back" />
+                  <ImageView fx:id="contactsIcon" fitHeight="31.0" fitWidth="29.0" layoutX="631.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../contacts.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </AnchorPane>
             <Label alignment="CENTER" layoutX="298.0" layoutY="188.0" prefHeight="51.0" prefWidth="742.0" text="Create a Transaction" textAlignment="CENTER">

@@ -2,7 +2,6 @@ package com.banking_application.scenes;
 
 import com.banking_application.Card;
 import com.banking_application.Customer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -32,7 +30,7 @@ public class cardsSettingsController implements Initializable {
     private Stage stage;
     private Parent parent;
     private Customer loggedInCustomer;
-    private int cardItemsPerRow = 4;
+    private final int cardItemsPerRow = 4;
 
     @FXML
     private Label welcomeLabel;
@@ -84,7 +82,7 @@ public class cardsSettingsController implements Initializable {
             imageView.setFitHeight(70);
             imageView.setFitWidth(70);
             Label cardName = new Label(ownedCards.get(i).getCardName());
-            Label cardLast4 = new Label(Long.toString( ownedCards.get(i).getCardNumber()) );
+            Label cardLast4 = new Label(ownedCards.get(i).getReadableCardNumber() );
             cardLast4.getStyleClass().add("labelIBANAccount");
             Label connectedIBAN = new Label(ownedCards.get(i).getConnectedBankAccount());
             connectedIBAN.getStyleClass().add("labelIBANAccount");

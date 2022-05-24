@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.cardSettingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.cardSettingController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
             <children>
@@ -119,11 +119,11 @@
             <Button layoutX="1051.0" layoutY="611.0" mnemonicParsing="false" onAction="#switchToCardsSettingsScreen" prefHeight="43.0" prefWidth="162.0" styleClass="button1" text="Back" />
             <Button fx:id="cancelButtonCard" layoutX="439.0" layoutY="411.0" mnemonicParsing="false" onAction="#cancelCard" prefHeight="43.0" prefWidth="236.0" text="Cancel Card" />
             <Button layoutX="708.0" layoutY="410.0" mnemonicParsing="false" onAction="#replaceCard" prefHeight="43.0" prefWidth="236.0" text="Replace Card" />
-            <TextField fx:id="simulateTransactionValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="542.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <TextField fx:id="simulateTransactionValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="542.0" prefHeight="33.0" prefWidth="147.0" />
             <Button layoutX="699.0" layoutY="542.0" mnemonicParsing="false" onAction="#simulateTransaction" prefHeight="33.0" prefWidth="168.0" text="Simulate Payment" />
-            <TextField fx:id="simulateDepositValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="587.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <TextField fx:id="simulateDepositValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="587.0" prefHeight="33.0" prefWidth="147.0" />
             <Button layoutX="699.0" layoutY="587.0" mnemonicParsing="false" onAction="#simulateDeposit" prefHeight="33.0" prefWidth="168.0" text="Simulate Deposit" />
-            <TextField fx:id="simulateWithdrawalValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="631.0" prefHeight="33.0" prefWidth="147.0" text="0" />
+            <TextField fx:id="simulateWithdrawalValue" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="631.0" prefHeight="33.0" prefWidth="147.0" />
             <Button layoutX="699.0" layoutY="631.0" mnemonicParsing="false" onAction="#simulateWithdrawal" prefHeight="33.0" prefWidth="168.0" text="Simulate Withdrawal" />
             <TextField editable="false" layoutX="450.0" layoutY="542.0" prefHeight="33.0" prefWidth="29.0" text="€" />
             <TextField editable="false" layoutX="450.0" layoutY="587.0" prefHeight="33.0" prefWidth="29.0" text="€" />

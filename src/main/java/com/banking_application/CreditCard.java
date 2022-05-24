@@ -1,13 +1,12 @@
 package com.banking_application;
-
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class CreditCard  implements Serializable, Card {
     String cardName;
     long cardNumber;
+    String readableCardNumber;
     int expMonth;
     int expYear;
     int CVV;
@@ -16,9 +15,11 @@ public class CreditCard  implements Serializable, Card {
 
     public CreditCard(String connectedBankAccount, String cardName){
         this.connectedBankAccount = connectedBankAccount;
-        this.generateNewCardNumber();
+        this.generateCardNumberDetails();
         this.isActive = true;
         this.cardName = cardName;
+        this.expMonth = LocalDate.now().getMonthValue();
+        this.expYear = Integer.valueOf( String.valueOf(LocalDate.now().getYear() + 5).substring(2) );
     }
 
 
@@ -83,13 +84,29 @@ public class CreditCard  implements Serializable, Card {
         isActive = active;
     }
 
-    private void generateNewCardNumber(){
-        String ccNumber = "";
-        for (int i=0;i<16;i++){
-            ccNumber = ccNumber + Integer.toString( new Random().nextInt(9) );
+
+
+    private void generateCardNumberDetails(){
+        String readableSpace = "   ";
+        String readableCardNumber = "4319"+ readableSpace + "49";
+        String cardNumber = "431949";
+        for (int i=0;i<10;i++){
+            if (i%4 == 2) {
+                readableCardNumber += readableSpace;
+            }
+            int randomValue = new Random().nextInt(9);
+            readableCardNumber = readableCardNumber + randomValue;
+            cardNumber = cardNumber +  randomValue;
         }
-        System.out.println(Instant.now());
+        this.cardNumber = Long.valueOf( cardNumber );
+        this.readableCardNumber = readableCardNumber;
+        String cardCVV = "";
+        for (int i=0;i<3;i++){
+            cardCVV = cardCVV + new Random().nextInt(9);
+        }
+        this.setCVV(Integer.valueOf(cardCVV));
     }
+
 
     public String getCardName() {
         return cardName;
@@ -109,5 +126,9 @@ public class CreditCard  implements Serializable, Card {
 
     public String toString(){
         return "Credit Card registered to IBAN %s\nCard Number %s".formatted(this.connectedBankAccount,this.cardNumber);
+    }
+
+    public String getReadableCardNumber() {
+        return readableCardNumber;
     }
 }

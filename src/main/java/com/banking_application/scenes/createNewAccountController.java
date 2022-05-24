@@ -32,7 +32,7 @@ public class createNewAccountController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void initData(Customer customer, BankAccount bankAccount){
+    public void initData(Customer customer){
         this.loggedInCustomer=customer;
         this.loggedInCustomer.initializeCustomer();
     }

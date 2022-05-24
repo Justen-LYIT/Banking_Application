@@ -12,12 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class registerController implements Initializable {
@@ -34,6 +33,12 @@ public class registerController implements Initializable {
     private TextField passwordField1;
     @FXML
     private TextField passwordField2;
+    @FXML
+    private AnchorPane usernameError;
+    @FXML
+    private AnchorPane passwordError1;
+    @FXML
+    private AnchorPane passwordError2;
 
     //Page 2
     @FXML
@@ -62,6 +67,51 @@ public class registerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if( this.userNameField != null) {
+            this.userNameField.setOnMouseMoved(mouseEvent -> {
+                if (!usernameIsAvailable()) {
+                    usernameError.setVisible(true);
+                }
+            });
+            this.userNameField.setOnMouseEntered(mouseEvent -> {
+                if (!usernameIsAvailable()) {
+                    usernameError.setVisible(true);
+                }
+            });
+            this.userNameField.setOnMouseExited(mouseEvent -> {
+                usernameError.setVisible(false);
+            });
+
+
+            this.passwordField1.setOnMouseMoved(mouseEvent -> {
+                if (!passwordsAreMatching() && passwordField1.getText().length() > 0 && passwordField2.getText().length() > 0) {
+                    passwordError1.setVisible(true);
+                }
+            });
+            this.passwordField1.setOnMouseEntered(mouseEvent -> {
+                if (!passwordsAreMatching() && passwordField1.getText().length() > 0 && passwordField2.getText().length() > 0) {
+                    passwordError1.setVisible(true);
+                }
+            });
+            this.passwordField1.setOnMouseExited(mouseEvent -> {
+                passwordError1.setVisible(false);
+            });
+
+
+            this.passwordField2.setOnMouseMoved(mouseEvent -> {
+                if (!passwordsAreMatching() && passwordField1.getText().length() > 0 && passwordField2.getText().length() > 0) {
+                    passwordError2.setVisible(true);
+                }
+            });
+            this.passwordField2.setOnMouseEntered(mouseEvent -> {
+                if (!passwordsAreMatching() && passwordField1.getText().length() > 0 && passwordField2.getText().length() > 0) {
+                    passwordError2.setVisible(true);
+                }
+            });
+            this.passwordField2.setOnMouseExited(mouseEvent -> {
+                passwordError2.setVisible(false);
+            });
+        }
     }
 
     public void initData(String username, String password){
@@ -69,21 +119,33 @@ public class registerController implements Initializable {
         this.password = password;
     }
 
-    public void checkUsernameAvailable()  {
+    public boolean usernameIsAvailable(){
         Authentication authentication = new Authentication();
-        if(authentication.usernameExists(userNameField.getText())){
+        return ! authentication.usernameExists(userNameField.getText());
+    }
+
+
+    public void checkUsernameAvailable()  {
+        if( ! usernameIsAvailable() ){
             userNameField.getStyleClass().add("incorrectTextInput");
         } else {
             userNameField.getStyleClass().removeAll("incorrectTextInput");
+            this.usernameError.setVisible(false);
         }
     }
+
+    public boolean passwordsAreMatching(){
+        return passwordField1.getText().equals(passwordField2.getText());
+    }
+
+
 
     public void checkMatchingPasswords() {
         if(passwordField1.getText().length() == 0 || passwordField2.getText().length() == 0 ){
             return;
         }
 
-        if(!passwordField1.getText().equals(passwordField2.getText())){
+        if(!passwordsAreMatching()){
             passwordField1.getStyleClass().add("incorrectTextInput");
             passwordField2.getStyleClass().add("incorrectTextInput");
         } else {
@@ -94,24 +156,16 @@ public class registerController implements Initializable {
 
     public void checkLoginCredentials(ActionEvent event) throws IOException {
         Authentication authentication = new Authentication();
-        if(     (userNameField.getText().length() == 0) ||
+        if(  (!   (userNameField.getText().length() == 0) ||
                 (authentication.usernameExists(userNameField.getText())) ||
                 (passwordField1.getText().length() == 0 || passwordField2.getText().length() == 0  ) ||
-                (!passwordField1.getText().equals(passwordField2.getText())) ){
-            incorrectCredentialsFeedback();
-        }
-        else if(passwordField1.getText().equals(passwordField2.getText()) ){
+                (!passwordField1.getText().equals(passwordField2.getText())) )  &&
+        passwordField1.getText().equals(passwordField2.getText()) ){
             switchToRegister2Scene(event);
         }
-        else {
-            System.out.println("Something went wrong..");
-        }
-
     }
 
-    public void incorrectCredentialsFeedback(){
-        System.out.println("error in the Suggested Login credentials");
-    }
+
 
 
     public void finaliseCreateAccount(ActionEvent event) throws IOException{
@@ -148,7 +202,7 @@ public class registerController implements Initializable {
 
         if (errorFree) {
             Authentication authentication = new Authentication();
-            if( authentication.createAccount(this.username
+            authentication.createAccount(this.username
                     ,firstNameField.getText()
                     ,middleNameField.getText()
                     ,lastNameField.getText()
@@ -160,12 +214,9 @@ public class registerController implements Initializable {
                     ,address3Field.getText()
                     ,cityField.getText()
                     ,zipField.getText()
-                    ,countriesAvailabe.getValue().toString()) ){
+                    ,countriesAvailabe.getValue().toString());
                 switchToHomePage(event, authentication.findCustomerViaUsername(this.username));
 
-            } else {
-                System.out.println("Error creating a new account");
-            }
         }
     }
 

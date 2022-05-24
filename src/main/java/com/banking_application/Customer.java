@@ -1,6 +1,5 @@
 package com.banking_application;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -11,8 +10,9 @@ public class Customer implements Serializable {
     String firstName;
     String middleName;
     String lastName;
+    String fullName;
     String dateOfBirth;
-    long creationTimestamp;
+    final long creationTimestamp;
     String passwordHash;
     String phone;
     String addressLine1;
@@ -39,6 +39,9 @@ public class Customer implements Serializable {
         this.city               = city;
         this.zip                = zip;
         this.country            = country;
+        this.fullName           = firstName;
+        if(middleName.length() >0 ) { this.fullName += " " + middleName;}
+        this.fullName           += " " + lastName;
         initializeCustomer();
         writeCustomerDataToFile();
     }
@@ -52,8 +55,9 @@ public class Customer implements Serializable {
                         transaction.originAccountIBAN.equals(ownedBankAccount.getIBANNumber())){
                     Boolean alreadyRecorded = false;
                     for (Transaction pastTransactions : ownedBankAccount.retrieveTransactions()){
-                        if(pastTransactions.id == transaction.id) {
+                        if (pastTransactions.id == transaction.id) {
                             alreadyRecorded = true;
+                            break;
                         }
                     }
                     if(!alreadyRecorded) {
@@ -91,10 +95,9 @@ public class Customer implements Serializable {
     }
 
 
-    public boolean writeCustomerDataToFile(){
+    public void writeCustomerDataToFile(){
         DatabaseFileManager databaseFileManager = new DatabaseFileManager();
         databaseFileManager.writeCustomerObjectToFile(this);
-        return true;
     }
 
     public BankAccount retrieveCurrentAccount(){
@@ -269,7 +272,17 @@ public class Customer implements Serializable {
     }
 
 
+    public String getFullName() {
+        return fullName;
+    }
 
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
     public String toString(){
         return String.format("Customer ID %s: %s",id, userName);

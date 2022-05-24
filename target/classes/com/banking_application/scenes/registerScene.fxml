@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.registerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.registerController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
          <children>
@@ -39,6 +39,21 @@
                         <Label layoutX="50.0" layoutY="165.0" prefHeight="41.0" prefWidth="127.0" text="Confirm Password" />
                      </children>
                   </Pane>
+                  <AnchorPane fx:id="passwordError1" layoutX="753.0" layoutY="180.0" prefHeight="30.0" prefWidth="287.0" style="-fx-background-color: #c6c6c6; -fx-background-radius: 60px; -fx-border-color: grey; -fx-border-radius: 60px;" visible="false">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="-2.0" prefHeight="35.0" prefWidth="304.0" style="-fx-text-fill: red;" text="Confirm that the passwords are matching" textAlignment="CENTER" textFill="#c6c6c6" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="usernameError" layoutX="753.0" layoutY="111.0" prefHeight="30.0" prefWidth="287.0" style="-fx-background-color: #c6c6c6; -fx-background-radius: 60px; -fx-border-color: grey; -fx-border-radius: 60px;" visible="false">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="-2.0" prefHeight="35.0" prefWidth="240.0" style="-fx-text-fill: red;" text="Please choose another username" textAlignment="CENTER" textFill="#c6c6c6" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="passwordError2" layoutX="753.0" layoutY="253.0" prefHeight="30.0" prefWidth="287.0" style="-fx-background-color: #c6c6c6; -fx-background-radius: 60px; -fx-border-color: grey; -fx-border-radius: 60px;" visible="false">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="-2.0" prefHeight="35.0" prefWidth="304.0" style="-fx-text-fill: red;" text="Confirm that the passwords are matching" textAlignment="CENTER" textFill="#c6c6c6" />
+                     </children>
+                  </AnchorPane>
                </children>
             </Pane>
          </children></Pane>

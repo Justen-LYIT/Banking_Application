@@ -1,12 +1,11 @@
 package com.banking_application;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class DatabaseFileManager {
-    String Path = System.getProperty("user.dir");
-    String customerFile = "/Storage/Customers";
-    String transactionFile = "/Storage/Transactions";
+    final String Path = System.getProperty("user.dir");
+    final String customerFile = "/Storage/Customers";
+    final String transactionFile = "/Storage/Transactions";
 
 
 

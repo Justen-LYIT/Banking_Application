@@ -4,6 +4,7 @@ package com.banking_application.scenes;
 import com.banking_application.BankAccount;
 import com.banking_application.Card;
 import com.banking_application.Customer;
+import com.banking_application.Transaction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -84,7 +85,7 @@ import java.util.ResourceBundle;
             }
 
             cardNameLabel.setText( selectedCard.getCardName() );
-            cardNumberLabel.setText(  String.valueOf( selectedCard.getCardNumber()) );
+            cardNumberLabel.setText(  String.valueOf( selectedCard.getReadableCardNumber()) );
             cardExpLabel.setText( selectedCard.getExpMonth() + "/" + selectedCard.getExpYear() );
             cardCVVLabel.setText( String.valueOf( selectedCard.getCVV() ) );
             cardConnectedIBAN.setText( selectedCard.getConnectedBankAccount() );
@@ -104,14 +105,28 @@ import java.util.ResourceBundle;
 
 
         public void cancelCard() throws IOException{
-            this.loggedInCustomer.getOwnedAssets().cancelBankAccount(this.connectedBankAccount);
+            if (this.connectedBankAccount.getBalance() > 0.0 ) {
+                // If balance on Debt account is higher than 0, create transaction towards current account of remaining balance, and close debt account
+                new Transaction(this.connectedBankAccount.getBalance()
+                        , this.connectedBankAccount.getIBANNumber()
+                        ,this.loggedInCustomer.retrieveCurrentAccount().getIBANNumber()
+                        ,"Positive Balance on Debt Account"
+                        , "Closing Debt Account");
+                this.loggedInCustomer.getOwnedAssets().cancelBankAccount(this.connectedBankAccount);
+            } else if (this.connectedBankAccount.getBalance() == 0.0) {
+                // Balance is zero, closing the debt account
+                this.loggedInCustomer.getOwnedAssets().cancelBankAccount(this.connectedBankAccount);
+            }
+
             this.loggedInCustomer.getOwnedAssets().cancelCard(this.selectedCard);
-            switchToCardsSettingsScreen();
+            this.loggedInCustomer.initializeCustomer();
+            switchToTransitionScreenCard( "Card Cancelled" , "Proceeding to card Overview");
         }
 
         public void replaceCard() throws IOException{
-            this.loggedInCustomer.getOwnedAssets().replaceCard(this.selectedCard);
-            switchToCardsSettingsScreen();
+            Card replacedCard = this.loggedInCustomer.getOwnedAssets().replaceCard(this.selectedCard);
+            this.loggedInCustomer.initializeCustomer();
+            switchToTransitionScreenCard(replacedCard, "Card Replaced" , "Proceeding to newly created Card Settings");
         }
 
         public void simulateTransaction() throws IOException{
@@ -121,10 +136,10 @@ import java.util.ResourceBundle;
                 String rawInput = userInputInt + "." + userInputCents;
                 Double inputValue = Double.valueOf(rawInput);
                 //Checking if the withdrawing amount is allowed
-                if (this.connectedBankAccount.getBalance() >= inputValue) {
+                if (this.connectedBankAccount.getBalance() - this.connectedBankAccount.getDebtLimit() >= inputValue) {
                     this.selectedCard.makePayment(inputValue);
                     this.loggedInCustomer.initializeCustomer();
-                    switchToSpecificAccountsScreen();
+                    switchToTransitionScreenBank("Transaction Created Successfully" , "Proceeding to connected Bank Account");
                 }
             }
         }
@@ -138,7 +153,7 @@ import java.util.ResourceBundle;
                 Double inputValue = Double.valueOf(rawInput);
                 this.connectedBankAccount.addFunds(inputValue);
                 this.loggedInCustomer.initializeCustomer();
-                switchToSpecificAccountsScreen();
+                switchToTransitionScreenBank("Deposit Successful" , "Proceeding to connected Bank Account");
             }
         }
 
@@ -150,10 +165,10 @@ import java.util.ResourceBundle;
                 String rawInput = userInputInt + "." + userInputCents;
                 Double inputValue = Double.valueOf(rawInput);
                 //Checking if the withdrawing amount is allowed
-                if (this.connectedBankAccount.getBalance() >= inputValue) {
+                if (this.connectedBankAccount.getBalance() - this.connectedBankAccount.getDebtLimit()  >= inputValue) {
                     this.connectedBankAccount.withdrawFunds(inputValue);
                     this.loggedInCustomer.initializeCustomer();
-                    switchToSpecificAccountsScreen();
+                    switchToTransitionScreenBank("Withdrawal Successful" , "Proceeding to connected Bank Account");
                 }
             }
         }
@@ -183,8 +198,59 @@ import java.util.ResourceBundle;
                 return false;
             }
             return true;
-
         }
+        public void switchToTransitionScreenCard(String message1, String message2) throws IOException{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("transitionScene.fxml"));
+            parent = loader.load();
+            scene = new Scene(parent);
+            transitionController transitionController = loader.getController();
+            transitionController.initData(this.loggedInCustomer
+                    ,(Card)null
+                    ,message1
+                    ,message2 );
+            stage = (Stage) homePageImage.getScene().getWindow();
+            stage.setScene(scene);
+            transitionController.transition("cardOverview");
+        }
+
+        public void switchToTransitionScreenCard(Card card, String message1, String message2) throws IOException{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("transitionScene.fxml"));
+            parent = loader.load();
+            scene = new Scene(parent);
+            transitionController transitionController = loader.getController();
+            transitionController.initData(this.loggedInCustomer
+                    ,card
+                    ,message1
+                    ,message2 );
+            stage = (Stage) homePageImage.getScene().getWindow();
+            stage.setScene(scene);
+            transitionController.transition("card");
+        }
+
+        public void switchToTransitionScreenBank(String message1, String message2) throws IOException{
+            BankAccount selectedBankAccount = null;
+            for (BankAccount bankAccount : this.loggedInCustomer.retrieveAllBankAccounts()){
+                if (bankAccount.getIBANNumber().equals(this.selectedCard.getConnectedBankAccount())){
+                    selectedBankAccount = bankAccount;
+                }
+            }
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("transitionScene.fxml"));
+            parent = loader.load();
+            scene = new Scene(parent);
+            transitionController transitionController = loader.getController();
+            transitionController.initData(this.loggedInCustomer
+                    ,selectedBankAccount
+                    ,message1
+                    ,message2 );
+            stage = (Stage) homePageImage.getScene().getWindow();
+            stage.setScene(scene);
+            transitionController.transition("bankAccount");
+        }
+
+
 
         public void switchToStartUpScreen() throws IOException {
             parent = FXMLLoader.load(getClass().getResource(("startUpScene.fxml")));

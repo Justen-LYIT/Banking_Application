@@ -21,45 +21,30 @@ public class Authentication {
      * @param city City of the Customer
      * @param zip ZIP of the customer
      * @param country Country of residence of the customer
-     * @return Boolean about if the account creation process was successful
      */
-    public boolean createAccount(String userName, String firstName, String middleName, String lastName, String dateOfBirth , String password, String phone , String addressLine1 , String addressLine2 , String addressLine3 , String city , String zip , String country){
+    public void createAccount(String userName, String firstName, String middleName, String lastName, String dateOfBirth , String password, String phone , String addressLine1 , String addressLine2 , String addressLine3 , String city , String zip , String country){
         if(userName == null ||
             userName.length() == 0 ||
                 password == null ||
                 password.length() == 0){
-            return false;
+            return;
         }
         DatabaseFileManager databaseFileManager = new DatabaseFileManager();
         for( Customer existingCustomer:databaseFileManager.readCustomerObjectsInFile()) {
             if (existingCustomer.userName.equals(userName)) {
-                return false;
+                return;
             }
         }
         Customer newUser = new Customer(userName, firstName, middleName, lastName, dateOfBirth , phone , addressLine1 , addressLine2 , addressLine3 , city , zip , country);
         newUser.setPassword( this.hashPassword(newUser,password));
-        return true;
     }
 
     /**
      * For use in combination with the create account method. Will collect all the user inserted information, to pass it on towards the Customer Class.
      * Feedback is provided which can be used to provide a message to the user
-     * @param userName Username of the account that needs to be created
-     * @param firstName First name of the user
-     * @param middleName Middle name of the user
-     * @param lastName Last name of the user
-     * @param dateOfBirth Date of Birth of the user, in String format (YYYY-mm-DD)
-     * @param password Plain Text Password of the user. Will be hashed when set in the Customer class
-     * @param phone Phone number of the user, in String format
-     * @param addressLine1 Address line of the customer, line 1
-     * @param addressLine2 Address line of the customer, line 2
-     * @param addressLine3 Address line of the customer, line 3
-     * @param city City of the Customer
-     * @param zip ZIP of the customer
-     * @param country Country of residence of the customer
      * @return A String with user feedback about the status of why the account creation process failed
      */
-    public String createAccountError(String userName, String firstName, String middleName, String lastName, String dateOfBirth ,String password, int phone , String addressLine1 , String addressLine2 , String addressLine3 , String city , String zip , String country){
+    public String createAccountError(){
         return "This username is already in use. Please enter a different name";
     }
 
@@ -77,11 +62,7 @@ public class Authentication {
         }
         Customer customer = findCustomerViaUsername(username);
         String enteredSeededPassword = hashPassword(customer,password);
-        if (customer.passwordHash.equals(enteredSeededPassword)){
-            return true;
-        } else{
-            return false;
-        }
+        return customer.passwordHash.equals(enteredSeededPassword);
     }
 
     /**
@@ -145,7 +126,7 @@ public class Authentication {
      * In this case, we are concatenating the password with the creation timestamp (UNIXTIME), and converting this to MD5
      * @param customer Customer object on which the password needs to be hashed.
      * @param password String value of the plain text password that was entered by the user
-     * @return
+     * @return a MD5 has of the Password combined with the unixtime of the creation time
      */
     public String hashPassword(Customer customer, String password){
         String seededPassword = password +customer.creationTimestamp;

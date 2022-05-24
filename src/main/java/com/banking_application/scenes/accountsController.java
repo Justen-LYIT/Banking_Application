@@ -1,40 +1,31 @@
 package com.banking_application.scenes;
 
 import com.banking_application.BankAccount;
+import com.banking_application.Card;
 import com.banking_application.Customer;
 import com.banking_application.Transaction;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class accountsController {
     private Scene scene;
@@ -61,6 +52,8 @@ public class accountsController {
     private HBox accountOptionsScrollPane;
     @FXML
     private TableView tableViewAccountTransactions;
+    @FXML
+    private Button closeBank;
 
     public void initData(Customer customer, BankAccount bankAccount) throws IOException{
         this.selectedBankAccount=bankAccount;
@@ -131,6 +124,27 @@ public class accountsController {
         }
     }
 
+    public void closeBankAccount() throws IOException{
+        if (this.selectedBankAccount.getBalance() < 0.0) {
+            return;
+        }
+        else if (this.selectedBankAccount.getBalance() > 0.0) {
+            new Transaction(this.selectedBankAccount.getBalance()
+            ,this.selectedBankAccount.getIBANNumber()
+            ,this.loggedInCustomer.retrieveCurrentAccount().getIBANNumber()
+            ,"Positive Balance on Account being closed"
+            , "Closing Bank Account");
+        }
+        this.loggedInCustomer.getOwnedAssets().cancelBankAccount(this.selectedBankAccount);
+        for (Card ownedCard : this.loggedInCustomer.getOwnedAssets().retrieveOwnedCreditCards()){
+            if (ownedCard.getConnectedBankAccount().equals(this.selectedBankAccount.getIBANNumber()) ){
+                this.loggedInCustomer.getOwnedAssets().cancelCard(ownedCard);
+            }
+        }
+        this.loggedInCustomer.initializeCustomer();
+        this.switchToAccountsScreen();
+    }
+
     public void createTransactionTable(){
         for (Node node : accountOptionsScrollPane.getChildrenUnmodifiable() ) {
             if (node.getStyleClass().contains("bankAccountOption") &&
@@ -139,6 +153,16 @@ public class accountsController {
             } else if (node.getId().equals(this.selectedBankAccount.getIBANNumber())){
                 node.getStyleClass().add("selectedItem");
             }
+        }
+
+        if ( this.selectedBankAccount.getClass().getSimpleName().equals("CurrentAccount") ) {
+            this.closeBank.setVisible(false);
+        } else if (this.selectedBankAccount.getBalance() >= 0.0 ) {
+            this.closeBank.setVisible(true);
+            this.closeBank.setDisable(false);
+        } else {
+            this.closeBank.setVisible(true);
+            this.closeBank.setDisable(true);
         }
 
         tableViewAccountTransactions.getItems().clear();
@@ -174,9 +198,7 @@ public class accountsController {
 
 
         ObservableList<Transaction> observableList = FXCollections.observableArrayList();
-        for (Transaction transaction : this.selectedBankAccount.retrieveTransactions()){
-            observableList.add(transaction);
-        }
+        observableList.addAll(this.selectedBankAccount.retrieveTransactions());
         tableViewAccountTransactions.setItems(observableList);
         tableViewAccountTransactions.getColumns().addAll(timestampColumn, typeColumn, senderColumn, receiverColumn, memoColumn, creditColumn, debitColumn);
     }
@@ -246,9 +268,9 @@ public class accountsController {
         parent = loader.load();
         scene = new Scene(parent);
         createTransactionController createTransactionController = loader.getController();
-        createTransactionController.initData(this.loggedInCustomer, this.selectedBankAccount);
         stage = (Stage) homePageImage.getScene().getWindow();
         stage.setScene(scene);
+        createTransactionController.initData(this.loggedInCustomer, this.selectedBankAccount, stage);
         stage.show();
     }
 

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,6 +27,8 @@ public class loginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private TextField passwordTextField;
+    @FXML
+    private Label loginErrorMessage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,8 +64,7 @@ public class loginController implements Initializable {
         if (authentication.loginAttempt(userName, password) ) {
             switchToHomePage(event, authentication.findCustomerViaUsername(userName));
         } else {
-            System.out.println(authentication.loginFailError(userName,password));
-//            TODO provide error label
+            loginErrorMessage.setText(authentication.loginFailError(userName,password));
         }
     }
 

@@ -1,12 +1,12 @@
 package com.banking_application;
-
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class DebitCard  implements Serializable, Card{
     String cardName;
     long cardNumber;
+    String readableCardNumber;
     int expMonth;
     int expYear;
     int CVV;
@@ -16,9 +16,11 @@ public class DebitCard  implements Serializable, Card{
 
     public DebitCard(String connectedBankAccount){
         this.connectedBankAccount = connectedBankAccount;
-        this.generateNewCardNumber();
+        this.generateCardNumberDetails();
         this.isActive = true;
         this.cardName = "Current Account Debit Card";
+        this.expMonth = LocalDate.now().getMonthValue();
+        this.expYear = Integer.valueOf( String.valueOf(LocalDate.now().getYear() + 5).substring(2) );
     }
 
 
@@ -83,18 +85,25 @@ public class DebitCard  implements Serializable, Card{
         isActive = active;
     }
 
-    private void generateNewCardNumber(){
-        String cardNumber = "";
-        for (int i=0;i<16;i++){
-            if (i%4==0 & i!=0) {
-                cardNumber += "  ";
+    private void generateCardNumberDetails(){
+        String readableSpace = "   ";
+        String readableCardNumber = "4319"+ readableSpace + "40";
+        String cardNumber = "431940";
+        for (int i=0;i<10;i++){
+            if (i%4 == 2) {
+                readableCardNumber += readableSpace;
             }
-            cardNumber = cardNumber + ( new Random().nextInt(9) );
+            int randomValue = new Random().nextInt(9);
+            readableCardNumber = readableCardNumber + randomValue;
+            cardNumber = cardNumber +  randomValue;
         }
-        this.cardName = cardNumber;
-        System.out.println(cardNumber);
-        System.out.println("Assign Card Exp + CVV");
-//        TODO implement card number generator
+        this.cardNumber = Long.valueOf( cardNumber );
+        this.readableCardNumber = readableCardNumber;
+        String cardCVV = "";
+        for (int i=0;i<3;i++){
+            cardCVV = cardCVV + new Random().nextInt(9);
+        }
+        this.setCVV(Integer.valueOf(cardCVV));
     }
 
     public String getCardName() {
@@ -115,5 +124,9 @@ public class DebitCard  implements Serializable, Card{
 
     public String toString(){
         return "Debit Card registered to IBAN %s\nCard Number %s".formatted(this.connectedBankAccount,this.cardNumber);
+    }
+
+    public String getReadableCardNumber() {
+        return readableCardNumber;
     }
 }
