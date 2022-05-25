@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking_application.scenes.homePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #F9F7F8;" stylesheets="@../styleSheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.banking_application.scenes.homePageController">
     <children>
         <Pane layoutX="72.0" layoutY="59.0" prefHeight="683.0" prefWidth="1256.0" style="-fx-background-color: #e3e1e1; -fx-background-radius: 10pt;">
             <children>
@@ -103,7 +103,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="754.0" layoutY="272.0" prefHeight="40.0" prefWidth="206.0" text="Value in Credit Accounts">
+            <Label layoutX="754.0" layoutY="272.0" prefHeight="40.0" prefWidth="206.0" text="Value in Debit Accounts">
                <font>
                   <Font size="18.0" />
                </font>
@@ -116,7 +116,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="754.0" layoutY="391.0" prefHeight="40.0" prefWidth="206.0" text="Value in Debit Accounts">
+            <Label layoutX="754.0" layoutY="391.0" prefHeight="40.0" prefWidth="206.0" text="Value in Credit Accounts">
                <font>
                   <Font size="18.0" />
                </font>
