@@ -156,11 +156,10 @@ public class registerController implements Initializable {
 
     public void checkLoginCredentials(ActionEvent event) throws IOException {
         Authentication authentication = new Authentication();
-        if(  (!   (userNameField.getText().length() == 0) ||
-                (authentication.usernameExists(userNameField.getText())) ||
-                (passwordField1.getText().length() == 0 || passwordField2.getText().length() == 0  ) ||
-                (!passwordField1.getText().equals(passwordField2.getText())) )  &&
-        passwordField1.getText().equals(passwordField2.getText()) ){
+        if(  userNameField.getText().length() > 0  &&
+                !authentication.usernameExists(userNameField.getText()) &&
+                passwordField1.getText().length() > 0 && passwordField2.getText().length() > 0   &&
+                passwordField1.getText().equals(passwordField2.getText())   ) {
             switchToRegister2Scene(event);
         }
     }
